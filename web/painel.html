@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Painel de Controle - Habitat Marte (ECLSS)</title>
+  <style>
+    body { font-family: sans-serif; background: #1b1b1b; color: #eee; max-width: 520px; margin: 2rem auto; }
+    .card { background: #2a2a2a; padding: 1rem; border-radius: 8px; margin-bottom: 1rem; }
+    input, button { padding: .4rem; margin: .2rem 0; }
+    #mensagem.erro { color: #ff6b6b; } #mensagem.ok { color: #6bff95; }
+  </style>
+</head>
+<body>
+  <h1>ECLSS - Habitat Marte</h1>
+  <div class="card">
+    <p>Oxigenio: <strong id="nivel-oxigenio">1000</strong> kg</p>
+    <p>Agua: <strong id="nivel-agua">2000</strong> L</p>
+  </div>
+  <form id="form-oxigenio" class="card">
+    <label>Astronauta <input id="astronauta" type="text"></label><br>
+    <label>Quantidade (kg) <input id="quantidade" type="number"></label><br>
+    <button id="btn-solicitar" type="submit">Solicitar cota extra</button>
+  </form>
+  <p id="mensagem"></p>
+
+  <script>
+    var COTA_MAXIMA = 100;
+    var oxigenio = 1000;
+    var form = document.getElementById("form-oxigenio");
+    var msg = document.getElementById("mensagem");
+
+    function mostrar(texto, classe) { msg.textContent = texto; msg.className = classe; }
+
+    form.addEventListener("submit", function (ev) {
+      ev.preventDefault();
+      var nome = document.getElementById("astronauta").value.trim();
+      var qtd = parseFloat(document.getElementById("quantidade").value);
+      mostrar("Processando...", "");
+      // Resposta assincrona (simula latencia da comunicacao) -> exige espera explicita no teste
+      setTimeout(function () {
+        if (!nome || isNaN(qtd) || qtd <= 0) { mostrar("Dados invalidos", "erro"); return; }
+        if (qtd > COTA_MAXIMA) { mostrar("Solicitacao negada: excede a cota de racionamento", "erro"); return; }
+        if (qtd > oxigenio) { mostrar("Solicitacao negada: oxigenio insuficiente", "erro"); return; }
+        oxigenio -= qtd;
+        document.getElementById("nivel-oxigenio").textContent = oxigenio;
+        mostrar("Solicitacao aprovada para " + nome, "ok");
+      }, 600);
+    });
+  </script>
+</body>
+</html>
