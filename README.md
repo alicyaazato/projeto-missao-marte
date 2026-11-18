@@ -1,4 +1,4 @@
-[![Pipeline ECLSS](https://github.com/SEU_USUARIO/projeto-missao-marte/actions/workflows/pipeline.yml/badge.svg)](https://github.com/SEU_USUARIO/projeto-missao-marte/actions/workflows/pipeline.yml)
+[![Pipeline ECLSS](https://github.com/alicya/projeto-missao-marte/actions/workflows/pipeline.yml/badge.svg)](https://github.com/alicya/projeto-missao-marte/actions/workflows/pipeline.yml)
 
 # Missão Marte: ECLSS – Automação de Testes
 
@@ -6,7 +6,7 @@ Suíte de testes do sistema de suporte à vida do Habitat de Marte: pytest (fixt
 
 ## Executar localmente
 ```bash
-git clone https://github.com/SEU_USUARIO/projeto-missao-marte.git
+git clone https://github.com/alicya/projeto-missao-marte.git
 cd projeto-missao-marte
 python -m venv .venv && source .venv/bin/activate   # Windows: .venv\Scripts\activate
 pip install -r requirements.txt
